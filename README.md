@@ -7,7 +7,14 @@ map, given as a 2-dimensional point. It has an identification number (ID), two c
 can serve as a vertex for an element. Every element has an ID and is defined by three vertices
 – by three node IDs
 blablabla...
-## example usage
-`python3 view_spot_finder.py mesh_x_sin_cos_20000.json 10000`
-## used python versions
+## usage
+### finding spots:
+`python3 view_spot_finder.py {filename} {number_of_spots}` -> `python3 view_spot_finder.py mesh_x_sin_cos_20000.json 10000`
+### to test if element id is a spot:
+`python3 test_spots.py {filename} {spot_element_id}` -> `python3 test_spots.py mesh_x_sin_cos_20000.json 15800`
+
+## dependencies
+### python versions
 `Python 3.10.12`
+### others
+only `mypy` for typings
