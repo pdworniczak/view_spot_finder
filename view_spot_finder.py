@@ -1,6 +1,6 @@
 import sys, json
 from typing import List, Set
-from mesh_types import Mesh, ElementWithValue
+from mesh_types import Mesh, Value, ElementWithValue
 
 def map_element_to_element_with_value(mesh: Mesh) -> List[ElementWithValue]:
     elements:List[ElementWithValue] = []
@@ -17,7 +17,7 @@ def map_element_to_element_with_value(mesh: Mesh) -> List[ElementWithValue]:
     return elements
 
 def find_view_spots(mesh: Mesh):
-    spots: List[int] = []
+    spots: List[Value] = []
     nodes_allready_used_by_spots: Set[int] = set([])
 
     elements_with_value = map_element_to_element_with_value(mesh)
@@ -27,7 +27,7 @@ def find_view_spots(mesh: Mesh):
 
     first_spot = elements_with_value.pop()
 
-    spots.append(first_spot['value'])
+    spots.append({'element_id': first_spot['id'], 'value': first_spot['value']})
     nodes_allready_used_by_spots.update(first_spot['nodes'])
 
     while len(spots) < int(view_spot_number) and len(elements_with_value) > 0:
@@ -42,11 +42,9 @@ def find_view_spots(mesh: Mesh):
         len_used = len(nodes_allready_used_by_spots)
         nodes_allready_used_by_spots.update(potential_spot['nodes'])
         if len_used + 3 == len(nodes_allready_used_by_spots):
-            spots.append(potential_spot['value'])
+            spots.append({'element_id': potential_spot['id'], 'value': potential_spot['value'] })
 
-
-
-    print(nodes_allready_used_by_spots)
+    # print(nodes_allready_used_by_spots)
     print(spots)
 
 

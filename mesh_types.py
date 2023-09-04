@@ -1,6 +1,5 @@
 from typing import TypedDict, List
 
-
 class Node(TypedDict):
     id: int
     x: float
